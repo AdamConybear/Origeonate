@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
-// import { L } from "leaflet";
+import ProgressBar from '../components/ProgressBar'
 import "./Guess.css";
 
 class Guess extends Component {
@@ -13,6 +13,7 @@ class Guess extends Component {
 		unit: "",
 		userDistResults: [],
 		userLatLngResults: [],
+		score: 50,
 	};
 
 	componentDidMount() {
@@ -46,8 +47,10 @@ class Guess extends Component {
 
 	handleGuess = () => {
 		//5 rounds
+		//if the user did not place a marker and pressed guess, change userMarker to [0,0] and they dont get any points for round
 
 		if (this.state.count < 5) {
+
 			let distInMiles = this.getDistanceFromLatLonInKm(
 				this.state.userMarker.lat,
 				this.state.userMarker.lng,
@@ -85,6 +88,7 @@ class Guess extends Component {
 	addMarker = (map) => {
 		map.target.on("click", (e) => {
 			if (!this.state.showActual) {
+				document.getElementById('guess').style.pointerEvents = 'auto';
 				console.log("clicked: " + e.latlng);
 				this.setState({ userMarker: e.latlng });
 			}
@@ -155,6 +159,7 @@ class Guess extends Component {
 									Your guess was <strong>{this.state.distanceAway} miles</strong> away from correct
 									location
 								</p>
+								<ProgressBar bgcolor={"#ef6c00"} completed={this.state.score}/>
 								{this.state.count - 1 === 4 ? (
 									<div className="next-button" onClick={this.viewResults}>
 										View Summary
@@ -170,7 +175,7 @@ class Guess extends Component {
 				</MapContainer>
 
 				{!this.state.showActual && (
-					<div className="guess-button" onClick={this.handleGuess}>
+					<div className="guess-button" id="guess" onClick={this.handleGuess}>
 						GUESS
 					</div>
 				)}
