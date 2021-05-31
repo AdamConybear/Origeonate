@@ -14,23 +14,33 @@ Grant: database, cron jobs, data retrieval logic
 	- send pandas df to rds 
 	- wrap up in cron job 
 		- aws / ec2 ?? 
-	- start with soccer players and then transition to other topics 
+	- start with soccer players and then transition to other topics  
 - front-end queries 5 random observations each round 
 
 
 **fields to include (for hints)** 
 
+- date of birth / age 
+	- val: P569
 - height (str)
-	- {player name} has a height of {height}
-- weight (str or int)
-	- {player name} has a height of {weight}
+	- val: P2048
+	- hint str: {player name} has a height of {height}
+- weight (str or int) 
+	- val: P2067
+	- hint str: {player name} has a weight of {weight}
 - teams played for (list) 
-	- {player name} played (or plays) for {choose random from team list}
-- position played (list)
+	- val: P54
+	- hint str: {player name} played (or plays) for {choose random from team list}
+- position played (list)	
+	- val: P413
 - start play period (str or int)
-- number worn (str or int or list)
+	- val: P2031
+- number worn (str or int or list) 
+	- val: P1618
 - competitions played in (list)
+	- val: P1344
 - social media followers (int)
+	- val: P8687
 
 
 **schema / retrieval** 
